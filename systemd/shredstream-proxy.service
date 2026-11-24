@@ -1,0 +1,20 @@
+# /etc/systemd/system/shredstream-proxy.service
+[Unit]
+Description=Jito shredstream proxy
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=shredstream
+Environment=RUST_LOG=info
+ExecStart=/usr/local/bin/jito-shredstream-proxy shredstream \
+  --block-engine-url https://fra.jito.nolimitnodes.com \
+  --auth-keypair /etc/shredstream/keypair.json \
+  --desired-regions frankfurt \
+  --dest-ip-ports 127.0.0.1:8001
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
