@@ -107,7 +107,7 @@ The unit runs `/usr/local/bin/jito-shredstream-proxy` as user `shredstream`, rea
 ./docker/docker-run.sh
 ```
 
-Put your existing keypair at `./shredstream-keypair.json` first (it is git-ignored) and run the script from the repo root. It clones `no-limit-nodes/shredstream-proxy` into `./shredstream-proxy`, builds the image from source as `shredstream-proxy`, and starts a container named `shredstream-proxy` with `--network host`, `--restart unless-stopped`, `RUST_LOG=info` and the keypair mounted read-only at `/app/shredstream-keypair.json`. The clone step fails if `./shredstream-proxy` already exists, so remove it before running the script again.
+Put your existing keypair at `./shredstream-keypair.json` first (it is git-ignored) and run the script from the repo root. It clones `no-limit-nodes/shredstream-proxy` into `./shredstream-proxy` (or pulls the latest if it is already there), builds the image from source as `shredstream-proxy`, and starts a container named `shredstream-proxy` with `--network host`, `--restart unless-stopped`, `RUST_LOG=info` and the keypair mounted read-only at `/app/shredstream-keypair.json`. It is safe to run again: it updates the source, rebuilds, and replaces the old container.
 
 ## Configuration
 
